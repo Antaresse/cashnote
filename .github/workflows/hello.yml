@@ -1,0 +1,16 @@
+name: Mon premier workflow
+
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Dire bonjour
+        run: echo "Bonjour Grey ! Ton code a bien été poussé sur GitHub 🎉"
+
+      - name: Lister les fichiers
+        run: ls -la
