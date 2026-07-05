@@ -21,10 +21,14 @@ jobs:
       - name: Checkout du code
         uses: actions/checkout@v4
 
+      - name: Installer Vercel CLI (dernière version)
+        run: npm install --global vercel@latest
+
+      - name: Récupérer la config du projet
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Builder le projet
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Déployer sur Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
