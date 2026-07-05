@@ -1,19 +1,16 @@
 import React from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import AuthPage from './pages/AuthPage'; // Notre nouveau fichier !
+import AuthPage from './pages/AuthPage';
+import DashboardPage from './pages/DashboardPage'; // On importe notre nouvelle vue
 
 function AppContent() {
   const { user } = useAuth();
   
-  // Si l'utilisateur n'est pas connecté, on lui montre obligatoirement la page de Login/Register
+  // Si l'utilisateur n'est pas connecté, affichage de l'AuthPage
   if (!user) return <AuthPage />;
 
-  return (
-    <div>
-      {/* On affichera la page Dashboard ici dès qu'on l'aura générée */}
-      <h1>Bienvenue sur votre espace connecté !</h1>
-    </div>
-  );
+  // Si connecté, affichage du Dashboard complet
+  return <DashboardPage />;
 }
 
 export default function App() {
